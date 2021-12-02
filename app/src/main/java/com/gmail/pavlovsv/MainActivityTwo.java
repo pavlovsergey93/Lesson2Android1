@@ -1,4 +1,4 @@
-package com.gmail.pavlovsv93;
+package com.gmail.pavlovsv;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.gmail.pavlovsv93.R;
+
+public class MainActivityTwo extends AppCompatActivity {
 
     private TextView tw;
     @Override
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         double a = Math.random() * 100 / Math.random()*10;
         double b = Math.random() * 100 / Math.random()*10;
         int flag = (int) (Math.random() * 3);
-        String operator = null;
+        String operator;
         if (flag == 0){
             operator = "+";
         } else if(flag == 1){
@@ -35,7 +37,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.calc_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Uri uri = Uri.parse("calc://launch");
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.putExtra("argA", a);
+                intent.putExtra("argB", b);
+                intent.putExtra("oper",operator);
+
                 startActivity(Intent.createChooser(new Intent(Intent.ACTION_VIEW, uri), ""));
             }
         });
